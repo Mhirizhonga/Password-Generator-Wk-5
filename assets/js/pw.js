@@ -92,11 +92,11 @@ var specialCharacters = [
   function getPasswordOptions() {
 
   //Prompting the user for password length
-  var length = parseInt(prompt("Enter the length of the passowrd (between 8 and 128 characters."));
+  var length = parseInt(prompt("Enter the length of the passowrd (between 8 and 128 characters.)"));
 
   //Prompting the passsword length
   if (isNaN(length) || length < 8 || length > 128)  {
-    alert("Please enter a valie password length between 8 and 128 characters.");
+    alert("Please enter a valid password length between 8 and 128 characters.");
     return null;
   }
 
@@ -108,63 +108,60 @@ var specialCharacters = [
 
   // Validating at least one character type is selected for the password
   if (!includeLowerCase && !includeUpperCase && !includeNumbers && includeSpecialChars)  {
-    alert("Please select at least one character type for the password")
-  }
-  }
-  
-  // Function for getting a random element from an array
-  function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)]
+    alert("Please select at least one character type for the password");
+  return null;
   }
   
+//Returning an object containing all the options
+return  {
+  length: length,
+  includeLowerCase: includeLowerCase,
+  includeUpperCase: includeUpperCase,
+  includeNumbers: includeNumbers,
+  includeSpecialChars: includeSpecialChars,
+}
+  }
+
   // Function to generate password with user input
   function generatePassword() {
   var options = getPasswordOptions(); 
   if (!options) return ""; // If user cancels or inputs are invalid, return an empty string
-
+console.log(options);
   var password = "";
-  var allChars = [];
   var chosenChars = [];
 
   if (options.includeLowerCase)  {
-    allChars = allChars.concat("abcdefghijklmnopqrstuvwxyz".split(""));
-    chosenChars.push(getRandom("abcdefghijklmnopqrstuvwxyz".split("")));
+    chosenChars = chosenChars.concat(lowerCasedCharacters);
+            // Console Log
+console.log(chosenChars);
   }
 
   if (options.includeUpperCase)  {
-    allChars = allChars.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""));
-    chosenChars.push(getRandom("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")));
+    chosenChars = chosenChars.concat(upperCasedCharacters);
+            // Console Log
+console.log(chosenChars);
   }
 
   if (options.includeNumbers)  {
-    allChars = allChars.concat("0123456789".split(""));
-    chosenChars.push(getRandom("0123456789".split("")));
+    chosenChars = chosenChars.concat(numericCharacters);
+            // Console Log
+console.log(chosenChars);
   }
 
   if (options.includeSpecialChars)  {
-    allChars = allChars.concat("@%+\\/'!#$^?:,(){}[]~-_.".split(""));
-    chosenChars.push(getRandom("@%+\\/'!#$^?:,(){}[]~-".split("")));
+    chosenChars = chosenChars.concat(specialCharacters);
+        // Console Log
+console.log(chosenChars);
   }
 
 // Ensure at least one character from each selected character type is included
-for (var i = 0; i < chosenChars.length; i++)  {
-    password += chosenChars[i];
+for (var i = 0; i < options.length; i++)  {
+    password += chosenChars[Math.floor(Math.random() * chosenChars.length)];
 }
-
-// Generate the rest of the password randomly
-for (var i = chosenChars.length; i < options.length; i++)  {
-    passwrod += getRandom(allChars);
-}
-
-// Shuffle the password to mix the characters
-password = password.split("").sort(function () {
-return 0.5 - Math.random();
-}).join("");
 
 //return password;
-return options;
+return password;
 }
-  
   // Get references to the #generate element
   var generateBtn = document.querySelector('#generate');
   
@@ -172,8 +169,12 @@ return options;
   function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector('#password');
-  
+  // Console Log
+  console.log(passwordText);
+
     passwordText.value = password;
+        // Console Log
+console.log(password);
   }
   
   // Add event listener to generate button
