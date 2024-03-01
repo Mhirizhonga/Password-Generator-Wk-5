@@ -1,5 +1,5 @@
 # Password-Generator-Wk-5
-Utilising HTML, CSS (Bootstrap) and Javascript
+Utilising HTML, CSS and Javascript
 
 LINK to Deployed App: https://mhirizhonga.github.io/Password-Generator-Wk-5/
 
