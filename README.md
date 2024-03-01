@@ -1,6 +1,8 @@
 # Password-Generator-Wk-5
 Utilising HTML, CSS (Bootstrap) and Javascript
 
+LINK to Deployed App: https://mhirizhonga.github.io/Password-Generator-Wk-5/
+
 The project was built to make students utilise a number of things they'd made use of during classes including:
 - Arrays
 - if Statements
